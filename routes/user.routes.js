@@ -6,12 +6,12 @@ const { isLoggedIn } = require("../middlewares/guard");
 const router = express.Router();
 
 // shows the sign in form
-router.get("/signin", (req, res) => {
-  res.render("user/signin");
+router.get("/signup", (req, res) => {
+  res.render("user/signup");
 });
 
 // handles the creation of a user
-router.post("/signin", async (req, res) => {
+router.post("/signup", async (req, res) => {
   const user = new User();
   user.email = req.body.email;
   try {
@@ -19,7 +19,7 @@ router.post("/signin", async (req, res) => {
     await user.save();
     res.redirect("/user/login");
   } catch (error) {
-    res.redirect("/user/signin");
+    res.redirect("/user/signup");
   }
 });
 
