@@ -5,12 +5,12 @@ const session = require("express-session");
 const store = require("connect-mongo");
 const dotenv = require("dotenv");
 
-mongoose.connect("mongodb://localhost/unicorn");
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URL);
 
 const app = express();
 
-// environment variables
-dotenv.config();
 
 // template engine setup
 app.set("view engine", "ejs");
@@ -21,9 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 // hooking up the public folder
 app.use(express.static("public"));
 // middleware for setting up the session
+app.set("trust proxy",1);
+
 app.use(
   session({
-    secret: "helloworld",
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: false,
     cookie: {
@@ -31,7 +33,7 @@ app.use(
       maxAge: 1200000,
     },
     store: store.create({
-      mongoUrl: "mongodb://localhost/unicorn",
+      mongoUrl: process.env.MONGODB_URL,
     }),
   })
 );
@@ -58,5 +60,5 @@ app.use("/post", postRouter);
 const commentRouter = require("./routes/comment.routes");
 app.use("/comment", commentRouter);
 
-app.listen(3001);
+app.listen(process.env.PORT);
 

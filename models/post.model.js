@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
-  Idea: {
+  idea: {
     type: String,
     required: true,
   },
   description: {
     type: String,
     required: true,
+  },
+  industry: {
+    type: String,
+    required: true
   },
   createdAt: {
     type: Date,
@@ -25,10 +29,6 @@ const postSchema = mongoose.Schema({
     type: [mongoose.SchemaTypes.ObjectId],
     default: [],
     ref: "Comment",
-  },
-  private: {
-    type: Boolean,
-    default: false,
   },
   upvote: {
     type: [mongoose.SchemaTypes.ObjectId],

@@ -1,0 +1,15 @@
+<h2>all posts</h2>
+<ul>
+  <% posts.forEach((post) => { %>
+  <li>
+    <%= post.idea %>
+    <a href="/post/<%= post.id %>">read</a>
+    <a href="/post/upvote/<%= post.id %> ">upvote</a>
+    <a href="/post/downvote/<%= post.id %> ">downvote</a>
+    <span><%= post.upvote.length - post.downvote.length %> </span>
+  </li>
+  <%= post.description %>
+  <%= post.industry %>
+  <%= post.author.email %>
+  <% }) %>
+</ul>

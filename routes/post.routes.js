@@ -9,11 +9,12 @@ router.get("/create", isLoggedIn, (req, res) => {
   res.render("post/create");
 });
 
-// handles the creation of a post
+// post creation
 router.post("/create", isLoggedIn, async (req, res) => {
   const post = new Post();
-  post.title = req.body.title;
+  post.idea = req.body.idea;
   post.description = req.body.description;
+  post.industry = req.body.industry;
   post.private = req.body.private;
   post.author = req.session.currentUser._id;
   try {
@@ -26,22 +27,7 @@ router.post("/create", isLoggedIn, async (req, res) => {
 
 // shows all posts
 router.get("/viewAll", isLoggedIn, async (req, res) => {
-  const posts = await Post.find({ author: req.session.currentUser._id });
-  res.render("post/viewAll", { posts });
-});
-
-// show private post
-router.get("/viewPrivate", isLoggedIn, async (req, res) => {
-  const posts = await Post.find({
-    author: req.session.currentUser._id,
-    private: true,
-  });
-  res.render("post/viewAll", { posts });
-});
-
-// shows public posts
-router.get("/viewPublic", isLoggedIn, async (req, res) => {
-  const posts = await Post.find({ private: false });
+  const posts = await Post.find({ author: req.session.currentUser._id }).populate("author");
   res.render("post/viewAll", { posts });
 });
 
