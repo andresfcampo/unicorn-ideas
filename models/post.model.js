@@ -17,7 +17,10 @@ const postSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // this is a reference to the user model
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
   author: {
     // type object id
     type: mongoose.SchemaTypes.ObjectId,

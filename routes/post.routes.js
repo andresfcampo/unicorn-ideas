@@ -25,6 +25,13 @@ router.post("/create", isLoggedIn, async (req, res) => {
   }
 });
 
+// form for updating an existing post
+router.get('/update/:id', async (req, res) => {
+  const post = await Post.findById(req.params.id)
+  res.render('updatePost', { post })
+})
+
+
 // shows all posts
 router.get("/viewAll", isLoggedIn, async (req, res) => {
   const posts = await Post.find({ author: req.session.currentUser._id }).populate("author");
@@ -51,7 +58,7 @@ router.get("/upvote/:id", isLoggedIn, async (req, res) => {
     post.upvote.push(req.session.currentUser._id);
     post.save();
   }
-  res.redirect("/post/viewPublic");
+  res.redirect("/post/viewAll");
 });
 
 // the downvote route
@@ -61,7 +68,7 @@ router.get("/downvote/:id", isLoggedIn, async (req, res) => {
     post.downvote.push(req.session.currentUser._id);
     post.save();
   }
-  res.redirect("/post/viewPublic");
+  res.redirect("/post/viewAll");
 });
 
 module.exports = router;

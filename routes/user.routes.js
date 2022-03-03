@@ -5,7 +5,7 @@ const { isLoggedIn } = require("../middlewares/guard");
 
 const router = express.Router();
 
-// shows the sign in form
+// shows the sign-up form
 router.get("/signup", (req, res) => {
   res.render("user/signup");
 });
@@ -14,8 +14,11 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
   const user = new User();
   user.email = req.body.email;
+  user.user = req.body.user;
+  console.log (req.body)
   try {
     user.password = await bcrypt.hash(req.body.password, 10);
+    console.log (user)
     await user.save();
     res.redirect("/user/login");
   } catch (error) {
