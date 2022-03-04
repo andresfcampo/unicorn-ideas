@@ -1,7 +1,18 @@
 <h2>login</h2>
 <form action="/user/login" method="post">
-  <input type="email" name="email" required />
-  <input type="password" name="password" required />
-  <button type="submit">submit</button>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Username</label>
+    <input type="user" name="user" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" name="password" required class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Agree to terms and conditions</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </form>
 

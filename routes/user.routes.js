@@ -26,6 +26,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+
 // shows the log in form
 router.get("/login", (req, res) => {
   res.render("user/login");
@@ -34,7 +35,7 @@ router.get("/login", (req, res) => {
 // handles the authentication of a user
 router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ user: req.body.user });
     const isPwCorrect = await bcrypt.compare(req.body.password, user.password);
     if (isPwCorrect) {
       req.session.currentUser = user;
