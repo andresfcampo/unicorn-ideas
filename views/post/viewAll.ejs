@@ -1,14 +1,23 @@
-<h2>all posts</h2>
-<ul>
-  <% posts.forEach((post) => { %>
-  <li>
-    <%= post.idea %>
-    <a href="/post/upvote/<%= post.id %> ">upvote</a>
-    <a href="/post/downvote/<%= post.id %> ">downvote</a>
-    <span><%= post.upvote.length - post.downvote.length %> </span>
-  </li>
-  <%= post.description %>
-  <%= post.industry %>
-  <%= post.author.user %>
-  <% }) %>
+<h2>All the soon-to-be Unicorns</h2>
+
+<div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
+  <div class="row align-items-center">
+    <div class="col-md-8 mb-3 mb-sm-0">
+<ul class="list-group list-group-flush">
+<% posts.forEach((post) => { %>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= post.idea %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= post.industry %></h6>
+    <p class="card-text"><%= post.description %></p>
+    <a href="/post/upvote/<%= post.id %>" class="card-link">Upvote</a>
+    <a href="/post/downvote/<%= post.id %>" class="card-link">Downvote</a>
+    <span><%= post.upvote.length - post.downvote.length %> </span> 
+    <p><br>Created by: <span><%= post.author.email %></span> </p>
+  </div>
+</div>
+<% }) %>
 </ul>
+</div>
+</div>
+</div>

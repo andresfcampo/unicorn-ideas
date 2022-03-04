@@ -19,7 +19,7 @@ router.post("/create", isLoggedIn, async (req, res) => {
   post.author = req.session.currentUser._id;
   try {
     await post.save();
-    res.redirect("/");
+    res.redirect("/post/viewAll");
   } catch (error) {
     res.redirect("/post/create");
   }
