@@ -28,13 +28,33 @@ router.post("/create", isLoggedIn, async (req, res) => {
 // form for updating an existing post
 router.get('/update/:id', async (req, res) => {
   const post = await Post.findById(req.params.id)
-  res.render('updatePost', { post })
+  res.render('post/updatePost', { post })
 })
 
+// route for handling the update of an existing post
+router.put(
+  '/updatePost/:id',
+  async (req, res) => {
+    const post = await Post.findById(req.params.id)
+    post.idea = req.body.idea
+    post.description = req.body.description
+    post.industry = req.body.industry
+    await post.save() 
+    res.redirect("/post/viewAll")
+  },
+)
+
+
+
+// route for handling the deletion of a post
+router.delete('/:id', async (req, res) => {
+  await Post.findByIdAndDelete(req.params.id)
+  res.redirect('/post/viewAll')
+})
 
 // shows all posts
 router.get("/viewAll", isLoggedIn, async (req, res) => {
-  const posts = await Post.find({ author: req.session.currentUser._id }).populate("author");
+  const posts = await Post.find().populate("author");
   res.render("post/viewAll", { posts });
 });
 

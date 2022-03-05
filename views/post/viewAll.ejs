@@ -13,7 +13,13 @@
     <a href="/post/upvote/<%= post.id %>" class="card-link">Upvote</a>
     <a href="/post/downvote/<%= post.id %>" class="card-link">Downvote</a>
     <span><%= post.upvote.length - post.downvote.length %> </span> 
-    <p><br>Created by: <span><%= post.author.email %></span> </p>
+    <p><br>Created by: <span><%= post.author.user %></span> </p>
+    <a href="/post/update/<%= post.id %>" class="btn btn-primary">Update</a>
+    <a href="/post/<%= post.id %>" class="btn btn-primary">Comment</a>
+  </div>
+  <div class="card-body">
+    <form action="/post/<%= post.id %>?_method=DELETE" method="post">
+      <button type="submit">delete</button>
   </div>
 </div>
 <% }) %>
@@ -21,3 +27,4 @@
 </div>
 </div>
 </div>
+

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require('method-override')
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const store = require("connect-mongo");
@@ -17,6 +18,8 @@ app.use(expressLayouts);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.set("trust proxy",1);
+
+app.use(methodOverride('_method'))
 
 app.use(
   session({
