@@ -44,8 +44,6 @@ router.put(
   },
 )
 
-
-
 // route for handling the deletion of a post
 router.delete('/:id', async (req, res) => {
   await Post.findByIdAndDelete(req.params.id)

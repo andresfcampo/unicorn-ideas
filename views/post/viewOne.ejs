@@ -1,11 +1,32 @@
 <h2><%= post.title %></h2>
-<p>author: <%= post.author.email %></p>
-<form action="/comment/create/<%= post.id %>" method="post">
-  <input type="text" name="content" />
-  <button type="submit">submit</button>
-</form>
+
+<div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
+  <div class="row align-items-center">
+    <div class="col-md-8 mb-3 mb-sm-0">
+      <ul class="list-group list-group-flush">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= post.idea %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= post.industry %></h6>
+            <p class="card-text"><%= post.description %></p>
+            <p><br>Created by: <span><%= post.author.user %></span> </p>
+            <a href="/post/update/<%= post.id %>" class="btn btn-primary">Update</a>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
 <ul>
   comments <% post.comments.forEach(comment => { %>
   <li><%= comment.content %> by <%= comment.author.email %></li>
   <% }) %>
 </ul>
+
+<p>author: <%= post.author.email %></p>
+<form action="/comment/create/<%= post.id %>" method="post">
+  <input type="text" name="content" placeholder="comment here" />
+  <button type="submit">submit</button>
+</form>
